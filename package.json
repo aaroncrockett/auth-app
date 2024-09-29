@@ -36,6 +36,7 @@
 	"dependencies": {
 		"bits-ui": "^0.21.15",
 		"clsx": "^2.1.1",
+		"firebase": "^10.13.2",
 		"tailwind-merge": "^2.5.2",
 		"tailwind-variants": "^0.2.1"
 	}
