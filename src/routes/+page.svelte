@@ -8,6 +8,5 @@
 </svelte:head>
 
 <section>
-	<h1 class="text-6xl text-red-500">My Auth App</h1>
-	<Button>example</Button>
+	<h1 class="text-6xl">Portland Tattoo Artist Directory</h1>
 </section>
