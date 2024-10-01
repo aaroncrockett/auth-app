@@ -1,3 +1,7 @@
+<script>
+	import Nav from './Nav.svelte';
+</script>
+
 <header>
-	<nav></nav>
+	<Nav></Nav>
 </header>
