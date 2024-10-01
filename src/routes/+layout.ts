@@ -1,23 +1,39 @@
-import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '$lib/firebase';
+import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
+import type { LayoutLoad } from './$types';
+import { createBrowserClient, createServerClient, isBrowser } from '@supabase/ssr';
 
-// Anonymous Sign-In
-export async function load() {
-	try {
-		// Sign in anonymously
-		await signInAnonymously(auth);
+export const load: LayoutLoad = async ({ fetch, data, depends }) => {
+	depends('supabase:auth');
 
-		// Monitor the authentication state
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				const uid = user.uid;
-				console.log('User ID:', uid);
-				// You can return this or use it elsewhere in your app
-			} else {
-				console.log('No user is signed in');
-			}
-		});
-	} catch (error) {
-		console.error('Error during anonymous sign-in', error);
-	}
-}
+	const supabase = isBrowser()
+		? createBrowserClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+				global: {
+					fetch
+				}
+			})
+		: createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+				global: {
+					fetch
+				},
+				cookies: {
+					getAll() {
+						return data.cookies;
+					}
+				}
+			});
+
+	/**
+	 * It's fine to use `getSession` here, because on the client, `getSession` is
+	 * safe, and on the server, it reads `session` from the `LayoutData`, which
+	 * safely checked the session using `safeGetSession`.
+	 */
+	const {
+		data: { session }
+	} = await supabase.auth.getSession();
+
+	const {
+		data: { user }
+	} = await supabase.auth.getUser();
+
+	return { supabase, session, user };
+};
