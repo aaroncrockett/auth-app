@@ -1,10 +1,6 @@
-<script>
-	import { Button } from '$lib/components/ui/button';
-</script>
-
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Auth testing app" />
+	<title>Portland Tattoo Artist Directory</title>
+	<meta name="description" content="Portland Tattoo Artist Directory" />
 </svelte:head>
 
 <section>
