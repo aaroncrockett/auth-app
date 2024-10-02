@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Form from './EmailSignupForm.svelte';
+	import MagicForm from './MagicSignupForm.svelte';
 
 	import { Button } from '$lib/components/ui/button';
 
@@ -8,7 +8,6 @@
 	let formType = 'magic';
 
 	let formTypes = [
-		{ id: 'magic', text: 'Magic Link' },
 		{ id: 'instagram', text: 'Instagram' },
 		{ id: 'google', text: 'Google' },
 		{ id: 'facebook', text: 'Facebook' }
@@ -20,7 +19,12 @@
 </script>
 
 <p>sign in method:</p>
-<ul>
+<div class="w-1/2 p-2 mx-auto border-2 border-gray-500">
+	<p>magic link</p>
+	<MagicForm data={data.form} />
+</div>
+<!-- <p class="w-1/2 mx-auto text-center border-b-2 border-gray-300">or</p>
+<ul class="w-1/2 mx-auto">
 	{#each formTypes as type}
 		<li class="p-1">
 			<Button variant="secondary" class="w-full" on:click={() => updateFormType(type.id)}>
@@ -28,4 +32,4 @@
 			</Button>
 		</li>
 	{/each}
-</ul>
+</ul> -->

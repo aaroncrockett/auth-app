@@ -21,4 +21,9 @@ export const passwordFormSchema = z.object({
 		})
 });
 
-export type FormSchema = z.infer<typeof passwordFormSchema>;
+export const magicFormSchema = z.object({
+	email: z.string().email()
+});
+
+export type PasswordFormSchema = z.infer<typeof passwordFormSchema>;
+export type MagicFormSchema = z.infer<typeof magicFormSchema>;

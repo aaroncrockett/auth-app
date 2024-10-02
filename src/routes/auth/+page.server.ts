@@ -5,7 +5,7 @@ import { fail } from '@sveltejs/kit';
 
 import type { PageServerLoad } from './$types.js';
 import { superValidate } from 'sveltekit-superforms';
-import { passwordFormSchema } from './schema';
+import { magicFormSchema, passwordFormSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
 
 export const load: PageServerLoad = async () => {
@@ -32,8 +32,23 @@ export const actions: Actions = {
 		} else {
 			redirect(303, '/');
 		}
-		return {
-			form
-		};
+	},
+	magic: async (event) => {
+		const form = await superValidate(event, zod(magicFormSchema));
+		const supabase = event.locals.supabase;
+		const email = form.data.email;
+		if (!form.valid) {
+			return fail(400, {
+				form
+			});
+		}
+		const { error } = await supabase.auth.signInWithOtp({ email });
+
+		if (error) {
+			console.error(error);
+			redirect(303, '/auth/error');
+		} else {
+			redirect(303, '/');
+		}
 	}
 };
