@@ -20,13 +20,13 @@
 </script>
 
 <div class="app">
-	<Header />
-
-	<main>
-		<slot />
-	</main>
-
-	<footer>
-		<p>footer</p>
-	</footer>
+	<div class="p-2">
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<footer>
+			<p>footer</p>
+		</footer>
+	</div>
 </div>
