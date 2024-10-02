@@ -2,7 +2,7 @@
 	import { linkVariants } from './index.js';
 	import { cn } from '$lib/utils.js';
 
-	let className = undefined;
+	let className: undefined | string = undefined;
 	let href: string;
 	export { className as class };
 </script>

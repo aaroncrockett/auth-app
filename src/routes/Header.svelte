@@ -1,7 +1,8 @@
 <script>
+	import { SectionWrapper } from '$lib/components/ui/section-wrapper';
 	import Nav from './Nav.svelte';
 </script>
 
-<header>
+<SectionWrapper class="bg-gray-200" type="header">
 	<Nav></Nav>
-</header>
+</SectionWrapper>

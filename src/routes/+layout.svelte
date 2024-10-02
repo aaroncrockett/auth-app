@@ -1,4 +1,5 @@
 <script>
+	import { SectionWrapper } from '$lib/components/ui/section-wrapper';
 	import Header from './Header.svelte';
 	import '../app.css';
 
@@ -20,13 +21,11 @@
 </script>
 
 <div class="app">
-	<div class="p-2">
+	<div>
 		<Header />
-		<main>
+		<SectionWrapper type="main">
 			<slot />
-		</main>
-		<footer>
-			<p>footer</p>
-		</footer>
+		</SectionWrapper>
+		<SectionWrapper type="footer"><p>footer</p></SectionWrapper>
 	</div>
 </div>
